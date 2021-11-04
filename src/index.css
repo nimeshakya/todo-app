@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --primary-color: #9dcee2;
+    --secondary-color: #f26a4f;
+    --text-color: #1d1d1d;
+    --danger-color: #cb1b16;
+    --background-color: #fedfd4;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    background-color: var(--primary-color);
+    width: 30%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px #5e5d5d;
+}
+
+form {
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form > input {
+    width: 75%;
+    height: 35px;
+    padding: 2px 7px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: #fff3ef;
+}
+
+form > button {
+    width: 80px;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    color: var(--background-color);
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px #0b82ad;
+}
+
+form > button:hover {
+    cursor: pointer;
+}
+
+form > button:active {
+    background-color: #e05e44;
+    box-shadow: none;
+}
+
+ul {
+    width: 100%;
+    height: 23.5em;
+    overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #fff3ef;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #0b82ad;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+li {
+    width: 100%;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid var(--text-color);
+}
+
+.action-btn-container {
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    main {
+        width: 50%;
+        height: 80%;
+    }
+}
+@media screen and (max-width: 500px) {
+    main {
+        width: 100%;
+        height: 100%;
+    }
+}
