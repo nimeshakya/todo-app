@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
-const Input = ({ task, setTask, todos, setTodos, editTodo, setEditTodo }) => {
-    const updateTodo = (taskName, id, complete) => {
-        const newTodos = todos.map((item) =>
-            item.id === id ? { name: taskName, id, complete } : item
-        );
+import { GlobalContext } from '../Context/GlobalState';
 
-        setTodos(newTodos);
-        setEditTodo('');
-    };
+const Input = () => {
+    const [task, setTask] = useState('');
 
-    // Put the editing task name in input field
+    const { addTask, editingTask, updateTask } = useContext(GlobalContext);
+
+    // put the editing task name in input field
     useEffect(() => {
-        editTodo ? setTask(editTodo.name) : setTask('');
-    }, [editTodo, setTask]);
+        editingTask ? setTask(editingTask.name) : setTask('');
+    }, [editingTask, setTask]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const newTask = {
             id: new Date().getTime(),
             name: task,
             complete: false,
         };
 
-        // if we're not editing the item, simply "add" the item to list else update the existing item according to edit
-        if (!editTodo) {
-            setTodos([...todos, newTask]);
+        if (!editingTask) {
+            addTask(newTask);
             setTask('');
         } else {
-            updateTodo(task, editTodo.id, editTodo.complete);
+            updateTask(task, editingTask.id, editingTask.complete);
         }
     };
 
@@ -39,9 +36,10 @@ const Input = ({ task, setTask, todos, setTodos, editTodo, setEditTodo }) => {
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
                 placeholder='eg. walk dogs...'
+                autoFocus
                 required
             />
-            <button type='submit'>{editTodo ? 'Edit' : 'Add'}</button>
+            <button type='submit'>{editingTask ? 'Edit' : 'Add'}</button>
         </form>
     );
 };

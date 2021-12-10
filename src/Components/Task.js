@@ -1,34 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const Task = ({ todo, todos, setTodos, editTodo, setEditTodo }) => {
-    const handleDelete = (id) => {
-        // finding the item to be removed, filter it out and updating the todos
-        const updatedTodos = todos.filter((item) => item.id !== id);
-        setTodos(updatedTodos);
-    };
+import { GlobalContext } from '../Context/GlobalState';
 
-    const handleComplete = (id) => {
-        // looping through the array of todos and if the id of item matches the parameter id update the item's completed property to false and vice versa
-        const updatedTodos = todos.map((item) => {
-            if (item.id === id) {
-                return {
-                    ...item,
-                    complete: !item.complete,
-                };
-            }
-            return item;
-        });
-        setTodos(updatedTodos);
-    };
-
-    const handleEdit = (id) => {
-        const editingItem = todos.find((item) => item.id === id);
-        setEditTodo(editingItem);
-    };
-
+const Task = ({ todo }) => {
+    const { deleteTask, doneTask, editTask } = useContext(GlobalContext);
     return (
         <li>
             <span
@@ -40,23 +18,27 @@ const Task = ({ todo, todos, setTodos, editTodo, setEditTodo }) => {
                 {todo.name}
             </span>
             <span className='action-btn-container'>
-                <span
-                    className='action-btn'
-                    onClick={() => handleComplete(todo.id)}
-                >
-                    <FontAwesomeIcon icon={faCheck} />
+                <span className='action-btn'>
+                    <FontAwesomeIcon
+                        icon={faCheck}
+                        onClick={() => doneTask(todo.id)}
+                    />
                 </span>
-                <span
-                    className='action-btn'
-                    onClick={() => handleEdit(todo.id)}
-                >
-                    <FontAwesomeIcon icon={faEdit} />
+                <span className='action-btn'>
+                    <FontAwesomeIcon
+                        icon={faEdit}
+                        onClick={() => {
+                            editTask(todo.id);
+                        }}
+                    />
                 </span>
-                <span
-                    className='action-btn'
-                    onClick={() => handleDelete(todo.id)}
-                >
-                    <FontAwesomeIcon icon={faTimes} />
+                <span className='action-btn'>
+                    <FontAwesomeIcon
+                        icon={faTimes}
+                        onClick={() => {
+                            deleteTask(todo.id);
+                        }}
+                    />
                 </span>
             </span>
         </li>

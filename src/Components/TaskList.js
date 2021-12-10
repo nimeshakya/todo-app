@@ -1,22 +1,15 @@
 import React from 'react';
 
 import Task from './Task';
+import { GlobalContext } from '../Context/GlobalState';
 
-const TaskList = ({ todos, setTodos, editTodo, setEditTodo }) => {
+const TaskList = () => {
+    const { todos } = React.useContext(GlobalContext);
     if (todos.length > 0) {
         return (
             <ul>
                 {todos.map((todo) => {
-                    return (
-                        <Task
-                            key={todo.id}
-                            todo={todo}
-                            todos={todos}
-                            setTodos={setTodos}
-                            editTodo={editTodo}
-                            setEditTodo={setEditTodo}
-                        />
-                    );
+                    return <Task key={todo.id} todo={todo} />;
                 })}
             </ul>
         );
