@@ -34,16 +34,16 @@ const AppReducer = (state, action) => {
             };
 
         case 'UPDATE_TASK':
+            const updatedTask = {
+                name: action.payload.taskName,
+                id: action.payload.id,
+                complete: action.payload.complete,
+            };
+
             return {
                 ...state,
                 todos: state.todos.map((item) =>
-                    item.id === action.payload.id
-                        ? {
-                              name: action.payload.taskName,
-                              id: action.payload.id,
-                              complete: action.payload.complete,
-                          }
-                        : item
+                    item.id === action.payload.id ? updatedTask : item
                 ),
                 editingTask: '',
             };
