@@ -1,5 +1,4 @@
-import React, { useReducer } from 'react';
-import { useEffect } from 'react/cjs/react.development';
+import React, { useEffect, useReducer } from 'react';
 
 import AppReducer from './AppReducer';
 
